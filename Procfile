@@ -1,1 +1,1 @@
-web java -Dserver.port=$PORT $JAVA_OPTS -jar build/libs/WebTech-diary-0.0.1-SNAPSHOT.jar
+web java -Dserver.port=$PORT $JAVA_OPTS -jar build/libs/deardiary-0.0.1-SNAPSHOT.jar
