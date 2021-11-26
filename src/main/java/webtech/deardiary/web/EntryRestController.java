@@ -1,26 +1,51 @@
 package webtech.deardiary.web;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import webtech.deardiary.web.api.Entry;
+import webtech.deardiary.web.api.EntryManipulationRequest;
+import webtech.deardiary.web.service.EntryService;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.ArrayList;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 @RestController
 public class EntryRestController {
 
-    private List<Entry> entries;
+    private final EntryService entryService;
 
-    public EntryRestController() {
-        entries = new ArrayList<>();
-        entries.add(new Entry(1, "Dear Diary", LocalDate.of(2020, 8, 31), LocalTime.of(18, 40)));
-        entries.add(new Entry(2, "I don't know what to do", LocalDate.now(), LocalTime.now()));
+    public EntryRestController(EntryService entryService) {
+        this.entryService = entryService;
     }
 
     @GetMapping(path = "/api/v1/entries")
-    public ResponseEntity<List<Entry>> fetchEntries() { return ResponseEntity.ok(entries);  }
+    public ResponseEntity<List<Entry>> fetchEntries() { return ResponseEntity.ok(entryService.findAll());  }
+
+
+    @GetMapping(path = "/api/v1/entries/{id}")
+    public ResponseEntity<Entry> fetchEntryById(@PathVariable Long id) {
+        var entry = entryService.findById(id);
+        return entry != null ? ResponseEntity.ok(entry) : ResponseEntity.notFound().build();
+    }
+
+    @PostMapping(path = "/api/v1/entries")
+    public ResponseEntity<Void> createEntry(@RequestBody EntryManipulationRequest request) throws URISyntaxException {
+        var entry = entryService.create(request);
+        URI uri = new URI("/api/v1/entries/" + entry.getID());
+        return ResponseEntity.created(uri).build();
+    }
+
+    @PutMapping(path = "/api/v1/entries/{id}")
+    public ResponseEntity<Entry> updateEntry(@PathVariable Long id, @RequestBody EntryManipulationRequest request) {
+
+        var entry = entryService.update(id, request);
+        return entry != null ? ResponseEntity.ok(entry) : ResponseEntity.notFound().build();
+    }
+
+    @DeleteMapping(path = "/api/v1/entries/{id}")
+    public ResponseEntity<Void> deleteEntry(@PathVariable Long id) {
+        boolean successful = entryService.deleteById(id);
+        return successful ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+    }
 }
