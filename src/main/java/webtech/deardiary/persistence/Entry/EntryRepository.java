@@ -1,4 +1,4 @@
-package webtech.deardiary.persistence;
+package webtech.deardiary.persistence.Entry;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

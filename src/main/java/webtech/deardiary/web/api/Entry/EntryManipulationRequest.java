@@ -1,28 +1,18 @@
-package webtech.deardiary.web.api;
+package webtech.deardiary.web.api.Entry;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class Entry {
+public class EntryManipulationRequest {
 
-    private long ID;
     private String Input;
     private LocalDate date;
     private LocalTime time;
 
-    public Entry(long ID, String input, LocalDate date, LocalTime time) {
-        this.ID = ID;
+    public EntryManipulationRequest(String input, LocalDate date, LocalTime time) {
         Input = input;
         this.date = date;
         this.time = time;
-    }
-
-    public long getID() {
-        return ID;
-    }
-
-    public void setID(long ID) {
-        this.ID = ID;
     }
 
     public String getInput() {
