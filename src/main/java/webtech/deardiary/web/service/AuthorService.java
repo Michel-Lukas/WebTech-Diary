@@ -1,5 +1,6 @@
 package webtech.deardiary.web.service;
 
+import org.springframework.stereotype.Service;
 import webtech.deardiary.persistence.Author.AuthorEntity;
 import webtech.deardiary.persistence.Author.AuthorRepository;
 import webtech.deardiary.persistence.Entry.EntryEntity;
@@ -11,6 +12,7 @@ import webtech.deardiary.web.api.Entry.EntryManipulationRequest;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class AuthorService {
 
     private final AuthorRepository authorRepository;
