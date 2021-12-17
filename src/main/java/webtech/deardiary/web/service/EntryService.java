@@ -1,10 +1,10 @@
 package webtech.deardiary.web.service;
 
 import org.springframework.stereotype.Service;
-import webtech.deardiary.persistence.Entry.EntryEntity;
-import webtech.deardiary.persistence.Entry.EntryRepository;
-import webtech.deardiary.web.api.Entry.Entry;
-import webtech.deardiary.web.api.Entry.EntryManipulationRequest;
+import webtech.deardiary.persistence.EntryEntity;
+import webtech.deardiary.persistence.EntryRepository;
+import webtech.deardiary.web.api.Entry;
+import webtech.deardiary.web.api.EntryManipulationRequest;
 
 import java.util.List;
 import java.util.stream.Collectors;

@@ -1,4 +1,4 @@
-package webtech.deardiary.persistence.Entry;
+package webtech.deardiary.persistence;
 
 import javax.persistence.*;
 import java.time.LocalDate;

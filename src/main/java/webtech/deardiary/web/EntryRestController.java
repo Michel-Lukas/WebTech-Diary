@@ -2,8 +2,8 @@ package webtech.deardiary.web;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import webtech.deardiary.web.api.Entry.Entry;
-import webtech.deardiary.web.api.Entry.EntryManipulationRequest;
+import webtech.deardiary.web.api.Entry;
+import webtech.deardiary.web.api.EntryManipulationRequest;
 import webtech.deardiary.web.service.EntryService;
 
 import java.net.URI;
