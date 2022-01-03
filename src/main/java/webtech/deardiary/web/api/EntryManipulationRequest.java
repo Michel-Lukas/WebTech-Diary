@@ -15,6 +15,8 @@ public class EntryManipulationRequest {
         this.time = time;
     }
 
+    public EntryManipulationRequest() {}
+
     public String getInput() {
         return Input;
     }
