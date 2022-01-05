@@ -1,8 +1,6 @@
 package webtech.deardiary.persistence;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.time.LocalTime;
 
 @Entity(name = "Entries")
 public class EntryEntity {
@@ -16,12 +14,12 @@ public class EntryEntity {
     private String input;
 
     @Column(name = "Date", nullable = false)
-    private LocalDate date;
+    private String date;
 
     @Column(name = "Time", nullable = false)
-    private LocalTime time;
+    private String time;
 
-    public EntryEntity(String input, LocalDate date, LocalTime time) {
+    public EntryEntity(String input, String date, String time) {
         this.input = input;
         this.date = date;
         this.time = time;
@@ -41,19 +39,19 @@ public class EntryEntity {
         this.input = input;
     }
 
-    public LocalDate getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
-    public LocalTime getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(LocalTime time) {
+    public void setTime(String time) {
         this.time = time;
     }
 }

@@ -1,16 +1,13 @@
 package webtech.deardiary.web.api;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-
 public class Entry {
 
     private long ID;
     private String Input;
-    private LocalDate date;
-    private LocalTime time;
+    private String date;
+    private String time;
 
-    public Entry(long ID, String input, LocalDate date, LocalTime time) {
+    public Entry(long ID, String input, String date, String time) {
         this.ID = ID;
         Input = input;
         this.date = date;
@@ -33,19 +30,19 @@ public class Entry {
         Input = input;
     }
 
-    public LocalDate getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
-    public LocalTime getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(LocalTime time) {
+    public void setTime(String time) {
         this.time = time;
     }
 }

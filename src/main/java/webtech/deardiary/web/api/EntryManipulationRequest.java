@@ -1,15 +1,12 @@
 package webtech.deardiary.web.api;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-
 public class EntryManipulationRequest {
 
     private String Input;
-    private LocalDate date;
-    private LocalTime time;
+    private String date;
+    private String time;
 
-    public EntryManipulationRequest(String input, LocalDate date, LocalTime time) {
+    public EntryManipulationRequest(String input, String date, String time) {
         Input = input;
         this.date = date;
         this.time = time;
@@ -25,19 +22,19 @@ public class EntryManipulationRequest {
         Input = input;
     }
 
-    public LocalDate getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
-    public LocalTime getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(LocalTime time) {
+    public void setTime(String time) {
         this.time = time;
     }
 }
