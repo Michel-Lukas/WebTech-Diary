@@ -31,9 +31,15 @@ public class EntryRestController {
 
     @PostMapping(path = "/api/v1/entries")
     public ResponseEntity<Void> createEntry(@RequestBody EntryManipulationRequest request) throws URISyntaxException {
-        var entry = entryService.create(request);
-        URI uri = new URI("/api/v1/entries/" + entry.getID());
-        return ResponseEntity.created(uri).build();
+        var valid = validate(request);
+        if (valid) {
+            var entry = entryService.create(request);
+            URI uri = new URI("/api/v1/entries/" + entry.getID());
+            return ResponseEntity.created(uri).build();
+        }
+        else {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @PutMapping(path = "/api/v1/entries/{id}")
@@ -47,5 +53,10 @@ public class EntryRestController {
     public ResponseEntity<Void> deleteEntry(@PathVariable Long id) {
         boolean successful = entryService.deleteById(id);
         return successful ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+    }
+
+    private boolean validate(EntryManipulationRequest request){
+        return request.getInput() != null
+                && !request.getInput().isBlank();
     }
 }
