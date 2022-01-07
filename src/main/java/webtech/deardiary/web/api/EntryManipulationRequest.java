@@ -1,8 +1,14 @@
 package webtech.deardiary.web.api;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 public class EntryManipulationRequest {
 
+    @Size(min = 4, message = "Please write down your thoughts in at least 4 characters.")
+    @NotBlank(message = "Your entry cannot be left empty. Please write down your thoughts.")
     private String Input;
+
     private String date;
     private String time;
 

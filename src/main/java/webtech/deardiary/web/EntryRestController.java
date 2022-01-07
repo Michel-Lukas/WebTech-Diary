@@ -6,6 +6,9 @@ import webtech.deardiary.web.api.Entry;
 import webtech.deardiary.web.api.EntryManipulationRequest;
 import webtech.deardiary.web.service.EntryService;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -30,7 +33,7 @@ public class EntryRestController {
     }
 
     @PostMapping(path = "/api/v1/entries")
-    public ResponseEntity<Void> createEntry(@RequestBody EntryManipulationRequest request) throws URISyntaxException {
+    public ResponseEntity<Void> createEntry(@Valid @RequestBody EntryManipulationRequest request) throws URISyntaxException {
         var valid = validate(request);
         if (valid) {
             var entry = entryService.create(request);
