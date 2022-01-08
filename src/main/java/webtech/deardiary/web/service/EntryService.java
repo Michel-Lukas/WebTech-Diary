@@ -12,22 +12,25 @@ import java.util.stream.Collectors;
 @Service
 public class EntryService {
 
+    private final EntryTransformer entryTransformer;
+
     private final EntryRepository entryRepository;
 
-    public EntryService(EntryRepository entryRepository) {
+    public EntryService(EntryRepository entryRepository, EntryTransformer entryTransformer) {
         this.entryRepository = entryRepository;
+        this.entryTransformer = entryTransformer;
     }
 
     public List<Entry> findAll() {
         List<EntryEntity> entries = entryRepository.findAll();
         return entries.stream()
-                .map(this::transformEntity)
+                .map(entryTransformer::transformEntity)
                 .collect(Collectors.toList());
     }
 
     public Entry findById(Long id) {
         var entryEntity = entryRepository.findById(id);
-        return entryEntity.map(this::transformEntity).orElse(null);
+        return entryEntity.map(entryTransformer::transformEntity).orElse(null);
     }
 
     public Entry create(EntryManipulationRequest request) {
@@ -36,7 +39,7 @@ public class EntryService {
                 request.getDate(),
                 request.getTime());
         entryEntity = entryRepository.save(entryEntity);
-        return transformEntity(entryEntity);
+        return entryTransformer.transformEntity(entryEntity);
     }
 
     public Entry update(Long id, EntryManipulationRequest request) {
@@ -50,7 +53,7 @@ public class EntryService {
         entryEntity.setTime(request.getTime());
         entryEntity = entryRepository.save(entryEntity);
 
-        return transformEntity(entryEntity);
+        return entryTransformer.transformEntity(entryEntity);
     }
 
     public boolean deleteById(Long id){
@@ -60,14 +63,5 @@ public class EntryService {
 
         entryRepository.deleteById(id);
         return true;
-    }
-
-    private Entry transformEntity(EntryEntity entryEntity) {
-        return new Entry(
-                entryEntity.getId(),
-                entryEntity.getInput(),
-                entryEntity.getDate(),
-                entryEntity.getTime()
-        );
     }
 }
