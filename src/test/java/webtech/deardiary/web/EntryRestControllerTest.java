@@ -3,7 +3,6 @@ package webtech.deardiary.web;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.internal.matchers.Matches;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -35,8 +34,8 @@ public class EntryRestControllerTest {
     @DisplayName("Should return correct Entries from Entry Service")
     void getEntriesTest() throws Exception {
         var entries = List.of(
-                new Entry(1, "Test1", "2021-31-12", "23:57"),
-                new Entry(2,"Test2", "2022-01-01", "12:05")
+                new Entry(1, "Test1", "2021-31-12", "23:57", 1),
+                new Entry(2,"Test2", "2022-01-01", "12:05", 1 )
         );
     doReturn(entries).when(entryService).findAll();
 
@@ -66,7 +65,7 @@ public class EntryRestControllerTest {
     @DisplayName("Should return 201 and Location header when creating an Entry")
     void createEntryTest() throws Exception {
         String entryAsJson = "{\"input\": \"Test\", \"date\": \"2021-01-01\", \"time\": \"01:01\"}";
-        var entry = new Entry(123, null, null, null);
+        var entry = new Entry(123, null, null, null, 0 );
         doReturn(entry).when(entryService).create(any());
 
         mockMvc.perform(

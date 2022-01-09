@@ -38,6 +38,7 @@ public class EntryService {
         var entryEntity = new EntryEntity(request.getInput(),
                 request.getDate(),
                 request.getTime());
+
         entryEntity = entryRepository.save(entryEntity);
         return entryTransformer.transformEntity(entryEntity);
     }

@@ -5,7 +5,7 @@ import javax.validation.constraints.Size;
 
 public class EntryManipulationRequest {
 
-    @Size(min = 4, message = "Please write down your thoughts in at least 4 characters")
+    @Size(min = 15, message = "Please write down your thoughts in at least 4 characters")
     @NotBlank(message = "Your entry cannot be left empty. Please write down your thoughts.")
     private String Input;
 
@@ -15,7 +15,6 @@ public class EntryManipulationRequest {
     public EntryManipulationRequest(String input, String date, String time) {
         Input = input;
         this.date = date;
-        this.time = time;
     }
 
     public EntryManipulationRequest() {}
